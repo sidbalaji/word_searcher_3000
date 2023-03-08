@@ -41,23 +41,20 @@ def check_guess(guess,word_list, grid , start_color_regex = Fore.GREEN, end_colo
     #we want to return word list because we modify if each word found is true
     return word_list
 if __name__ == '__main__':
-    start_color_regex = Fore.RED
-    end_color_regex = Fore.BLACK
-
-
 
     ###################################
     # The below two lines are inplace of SQL input
     #####################################
     word_list = ["able","about","above","accept", "momhole"]
-    text_word_list = ["able","about","above","accept"]
+
     word_list = [Word(_) for _ in word_list]
+    
+    #initializing that all words are not found (default is false)
     for word in word_list:
         word.found = False
         
     #geting the grid to actually initialize
     testGrid = Grid(15)
-
     testGrid.add_words(word_list)
     
         
