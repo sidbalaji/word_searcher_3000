@@ -4,11 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+
+[dev-packages]
+
 python-fire = "*"
 colorama = "*"
 
 [dev-packages]
 ipykernel = "*"
+main
 
 [requires]
 python_version = "3.8"
