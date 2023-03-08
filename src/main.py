@@ -2,6 +2,12 @@ import random
 from grid import Grid 
 from word import Word
 from colorama import Fore
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session , session_maker
+
+from sqlalchemy import Table
+from sqlalchemy import inspect
+
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -40,7 +46,18 @@ def check_guess(guess,word_list, grid , start_color_regex = Fore.GREEN, end_colo
     
     #we want to return word list because we modify if each word found is true
     return word_list
+    
+def run_evertyhing(difficulty):
+
+    return difficulty
+
 if __name__ == '__main__':
+    
+
+    engine = create_engine("sqlite:///word_list.db")
+    
+    with Session(engine) as session:
+        session.query()
 
     ###################################
     # The below two lines are inplace of SQL input
@@ -52,11 +69,11 @@ if __name__ == '__main__':
     #initializing that all words are not found (default is false)
     for word in word_list:
         word.found = False
-        
+
     #geting the grid to actually initialize
     testGrid = Grid(15)
     testGrid.add_words(word_list)
-    
+
         
     #present table    
     print_grid(testGrid.matrix)
@@ -64,10 +81,4 @@ if __name__ == '__main__':
     while not all([_.found for _ in word_list]):
         guess = input('Enter a word! : ')
         word_list = check_guess(guess, word_list, testGrid)
-        
-        
-
-        
-        
-
 
