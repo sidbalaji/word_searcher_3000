@@ -1,0 +1,1 @@
+python src/main.py easy --grid_size 15 --num_words 10
