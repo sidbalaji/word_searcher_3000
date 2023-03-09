@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import Table
 from sqlalchemy import inspect
 from sql_words import Easy_Words, Medium_Words, Difficult_Words
+import argparse
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -55,6 +56,8 @@ def run_evertyhing(difficulty, grid_size = 15, num_words = 5):
         tbl = Easy_Words
     elif difficulty.lower() == 'medium':
         tbl = Medium_Words
+    elif difficulty.lower() == 'difficult':
+        tbl = Difficult_Words
 
     with Session(engine) as session:
         for n in range(num_words):
@@ -66,6 +69,9 @@ def run_evertyhing(difficulty, grid_size = 15, num_words = 5):
         word_list = [Word(_.easy_words) for _ in word_list]
     elif difficulty.lower() == 'medium':
         word_list = [Word(_.medium_words) for _ in word_list]
+    elif difficulty.lower() == 'difficult':
+        word_list = [Word(_.difficult_words) for _ in word_list]
+
 
     
     #initializing that all words are not found (default is false)
@@ -88,17 +94,18 @@ def run_evertyhing(difficulty, grid_size = 15, num_words = 5):
     return 0
 
 if __name__ == '__main__':
-    run_evertyhing('medium', grid_size=20, num_words=10)
+    parser = argparse.ArgumentParser()
+    
+
+    parser.add_argument("difficulty", type=str)
+    parser.add_argument("--grid_size", type=int)
+    parser.add_argument("--num_words", type=int)
+
+    args = parser.parse_args()
+    print("--------------------------------")
+    print(args)
+    print("--------------------------------")
+    run_evertyhing(args.difficulty, args.grid_size, args.num_words)
 
     
         
-        
-
-    ###################################
-    # The below two lines are inplace of SQL input
-    #####################################
-
-    
-
-        
-    #present table    
