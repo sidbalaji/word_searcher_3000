@@ -71,25 +71,23 @@ Base.metadata.create_all(engine)
 word_list = pd.read_csv('words_sidtest.csv')
 pokemon_list = pd.read_csv('pokemon.csv')
 with Session(engine) as session: 
-    for pokemon in pokemon_list.Name.values.flatten():
-        pkm = Pokemon(pokemon_names = pokemon)
-        session.add(pkm)
-    # for each_word in word_list.values.flatten():
-    #     if len(each_word) < 5:
-    #         eword = Easy_Words(
-    #             easy_words = each_word
-    #         )
-    #     if len(each_word) > 5 and len(each_word) < 8:
-    #             mword = Medium_Words(
-    #         medium_words = each_word
-    #     )
+    # for pokemon in pokemon_list.Name.values.flatten():
+    #     pkm = Pokemon(pokemon_names = pokemon)
+    #     session.add(pkm)
+    for each_word in word_list.values.flatten():
+        if len(each_word) < 5:
+            eword = Easy_Words(easy_words = each_word)
+            
+            session.add(eword)
 
-    #     elif len(each_word) > 9:
-    #         dword = Difficult_Words(
-    #             difficult_words = each_word
-    #             )
+        if len(each_word) > 5 and len(each_word) < 8:
+            mword = Medium_Words(medium_words = each_word)
 
-    # session.add(eword)
-    # session.add(mword)
-    # session.add(dword)
+            session.add(mword)
+
+        elif len(each_word) > 9:
+            dword = Difficult_Words(difficult_words = each_word)
+            
+            session.add(dword)
+
     session.commit()
